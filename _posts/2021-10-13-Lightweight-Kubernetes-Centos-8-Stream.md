@@ -70,6 +70,8 @@ sudo firewall-cmd --reload
 
 Next we use sysctl to enable Kernel setting to allow for packet forwarding and bridged packets to traverse iptables. Both of these are require for the Kubernetes network interface (CNI) to operate. The settings are stored in a public GitHub Gist to make the setup simpler. 
 
+{% gist 316eae008bb123b783f90cb5ef8633b0 99-kubernetes-cri.conf %}
+
 ```bash
 sudo curl -o /etc/sysctl.d/99-kubernetes-cri.conf https://gist.githubusercontent.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0/raw/56b34f93fb0528aa6818141fbd3e0f5f36db39b1/99-kubernetes-cri.conf
 sudo sysctl --system
