@@ -4,17 +4,17 @@ title: Deploying Kubernetes using lightweight runtimes on Centos Stream 8
 ---
 
 
-Thanks to the introduction of the Kubernetes CRI there are now additional runtimes that exist for running container within the Kubernetes orchestration ecosystem. 
+Thanks to the introduction of the [Kubernetes CRI](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/) there are now additional runtimes that exist for running containers within the Kubernetes orchestration ecosystem. 
 
-In this article we will look at how we can use a lightweight runtime layer to create the smallest resource overhead for a running container. 
+In this article we will look at how we can use a lightweight runtime layer to create the smaller resource overheads when running container. 
 
-The runtime that we are going to utilise to meet this objective is the Cri-o CRI and the Crun OCI runtime. 
+The tools that we are going to utilise to meet this objective is the [Cri-o CRI](https://cri-o.io/) and the [Crun OCI runtime](https://github.com/containers/crun#crun). 
 
-Cri-o is a CRI interface that is focused on Kubernetes that does not contain additional features like other CRI solutions such as containerd. It is able to do this by hading off many tasks to libpod and the Container Tools project. 
+Cri-o is a container runtime interface that is purpose built to run containers in Kubernetes and does not contain additional features like other CRI implemantations such as `containerd`. It is able to do this by hading off many tasks to [libpod and other tools from the Container Tools project](https://www.capitalone.com/tech/cloud/container-runtime/). 
 
-Crun is a lightweight and performant OCI runtime that is developed in C. This OCI implementation is part of the Container Tools project like other tools like podman and buildah. This implementation is able to use tighter resource limits than runc as illustrated in the example below providing less overhead for a running container: 
+Crun is a lightweight and performant OCI runtime that is developed in C. This OCI implementation is part of the [Containers project](https://github.com/containers) like `podman`, `buildah` and others. This implementation is able to use tighter resource limits than `runc` as illustrated in the example below:  
 
-``` yaml
+```bash
 # podman --runtime /usr/bin/runc run --rm --memory 4M fedora echo it works
 
 Error: container_linux.go:346: starting container process caused "process_linux.go:327: getting pipe fds for pid 13859 caused \"readlink /proc/13859/fd/0: no such file or directory\"": OCI runtime command not found error
@@ -24,7 +24,9 @@ Error: container_linux.go:346: starting container process caused "process_linux.
 it works
 ```
 
-This can be deployed to a Centos 8 Stream environment relatively quickly using RPM package making ongoing management of the Kubernetes platform manageable as new versions are released. 
+In this example we see that when runnung the same `echo` command withing the fedora container image the container can execute with only 4 megabytes of memory using `crun` but raises an error when executed using `runc`.
+
+This Kubernetes topology can be deployed to a Centos 8 Stream relatively quickly using RPM packages making ongoing management of the Kubernetes platform more manageable as new versions are released. 
 
 The assumption of this guide is that a clean install of Centos 8 Stream has been deployed and updated. During my install I enabled the Container Tools AppStream module and installed these tools through the installer GUI.   
 
@@ -68,7 +70,7 @@ sudo firewall-cmd --zone=public --permanent --add-rich-rule 'rule family=ipv4 so
 sudo firewall-cmd --reload
 ```
 
-Next we use sysctl to enable Kernel setting to allow for packet forwarding and bridged packets to traverse iptables. Both of these are require for the Kubernetes network interface (CNI) to operate. The settings are stored in a public GitHub Gist to make the setup simpler. 
+Next we use `sysctl` to enable Kernel settings to allow for packet forwarding and bridged packets to traverse iptables. Both of these are require for the Kubernetes network interface (CNI) to operate. The settings are stored in a public GitHub Gist to make the setup simpler. 
 
 {% gist 316eae008bb123b783f90cb5ef8633b0 99-kubernetes-cri.conf %}
 
@@ -97,6 +99,8 @@ sudo systemctl enable crio --now
 
 Now that we have the CRI installed we need to configure Cri-o to set the cgroups driver. 
 
+{% gist 316eae008bb123b783f90cb5ef8633b0 02-cgroup-manager.conf %}
+
 ```bash
 sudo mkdir -p /etc/crio/crio.conf.d
 sudo curl -o /etc/crio/crio.conf.d/02-cgroup-manager.conf https://gist.githubusercontent.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0/raw/a0881b89a86420b874d6716205d669c0dbdd63cd/02-cgroup-manager.conf
@@ -118,12 +122,16 @@ sudo dnf install crun
 
 Adding the config to Cri-o can be done using adding to config to crio.conf.d directory we created earlier. After this config is added Cri-o will need a restart. 
 
+{% gist 316eae008bb123b783f90cb5ef8633b0 03-runtime-crun.conf %}
+
 ```bash
 sudo curl -o /etc/crio/crio.conf.d/03-runtime-crun.conf https://gist.githubusercontent.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0/raw/8b019a4e3c607a09d4d80e5989ac56657a72fd08/03-runtime-crun.conf
 sudo systemctl restart crio 
 ```
 
 Now that we have a runtime we can install Kubernetes to manage containers using the runtime we installed. The first step in getting this done is to add the kubernetes repository that holds the vanilla images. 
+
+{% gist 316eae008bb123b783f90cb5ef8633b0 kubernetes.repo %}
 
 ```bash
 sudo curl -o /etc/yum.repos.d/kubernetes.repo https://gist.githubusercontent.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0/raw/56b34f93fb0528aa6818141fbd3e0f5f36db39b1/kubernetes.repo
@@ -133,16 +141,18 @@ This repository definition utilises the `exclude` definition to ensure that the 
 
 To install the kubernetes RPMs we need to override the exclude with the `--disableexcludes` option for the kubernetes repository.
 
+```bash
 sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+```
 
-Now that we have the service in place we need to enable and restart the kublet service. I found that for some reason that I could not work out it needed this.
+Now that we have the service in place we need to enable and restart the `kublet` service. I found that for some reason that I could not work out it needed this.
 
 ```bash
 sudo systemctl enable --now kubelet
 sudo systemctl restart kubelet
 ```
 
-Once kublet is running we can use kubeadm to pull all of the cluster images so when we initialise the cluster it can deploy the correct components. 
+Once `kublet` is running we can use `kubeadm` to pull all of the cluster images so when we initialise the cluster it can deploy the correct components. 
 
 ```bash
 sudo kubeadm config images pull
@@ -150,7 +160,9 @@ sudo kubeadm config images pull
 
 This step can take some time depending on connectivity. 
 
-Once you have pulled the images you can stand-up a Kubernetes cluster using kubeadm to initialise the new cluster. 
+Once you have pulled the images you can stand-up a Kubernetes cluster using `kubeadm` to initialise the new cluster. 
+
+{% gist 316eae008bb123b783f90cb5ef8633b0 kubeadm-config.yaml %}
 
 ```bash
 curl -o /tmp/kubeadm-config.yaml https://gist.githubusercontent.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0/raw/08a76210c9cc5e85e005bf812d731a4fcec24932/kubeadm-config.yaml
@@ -159,9 +171,12 @@ sudo kubeadm init --config /tmp/kubeadm-config.yaml
 
 This will deploy all of the containers that make up the control plane and generate the required keys to interact with the API server. 
 
-Now we have a functioning Kubernetes cluster and you should be able to use kubectl to interact with the cluster. As we are building a single node cluster we need to relabel the node to be a worker as well as a master. 
+Now we have a functioning Kubernetes cluster and you should be able to use `kubectl` to interact with the cluster. As we are building a single node cluster we need to relabel the node to be a worker as well as a master. 
 
 ```bash
 kubectl label node localhost.localdomain node-role.kubernetes.io/worker=worker
 ```
 
+Now you should have a working cluster that you can interact with using `kubectl` 
+
+All of the config files are available in the following [GitHub Gist](https://gist.github.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0).
