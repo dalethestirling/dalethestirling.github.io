@@ -180,3 +180,29 @@ kubectl label node localhost.localdomain node-role.kubernetes.io/worker=worker
 Now you should have a working cluster that you can interact with using `kubectl` 
 
 All of the config files are available in the following [GitHub Gist](https://gist.github.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0).
+
+####Update: CGroups error. 
+Saw the following error in `journalctl` while troubleshooting a deployment issue. 
+
+```bash
+"Failed to find cgroups of kubelet" err="cpu and memory cgroup hierarchy not unified. cpu: /, memory: /system.slice/kubelet.service"
+```
+
+This can be corrected by adding some additional cgroups configuration. 
+
+{% gist 316eae008bb123b783f90cb5ef8633b0 kubeadm-config.yaml %}
+
+```bash
+sudo mkdir -p /etc/systemd/system/kubelet.service.d
+sudo curl -o /etc/systemd/system/kubelet.service.d/11-cgroups.conf https://gist.githubusercontent.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0/raw/1e1ed6922c7f01db971ab21508ad28aba27e5933/11-cgroups.conf
+systemctl daemon-reload && systemctl restart kubelet
+```
+This will add the required options to enable the cpu and memory interfaces. 
+
+####Update: Taint on node.
+As the cluster is a single node it contains all of the roles. Master hosts are tainted for `NoSchedule` by default. This means that non Pods are able to be deployed to the cluster. This can be removed with the following:
+
+```bash
+kubectl taint node localhost.localdomain node-role.kubernetes.io/master:NoSchedule-
+```
+My single node cluster proceeded to reschedule everything and be a mess for several minuites, but sorted itself out after that. 
