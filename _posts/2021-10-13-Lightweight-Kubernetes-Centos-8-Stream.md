@@ -181,7 +181,7 @@ Now you should have a working cluster that you can interact with using `kubectl`
 
 All of the config files are available in the following [GitHub Gist](https://gist.github.com/dalethestirling/316eae008bb123b783f90cb5ef8633b0).
 
-####Update: CGroups error. 
+###Update: CGroups error. 
 Saw the following error in `journalctl` while troubleshooting a deployment issue. 
 
 ```bash
@@ -199,7 +199,7 @@ systemctl daemon-reload && systemctl restart kubelet
 ```
 This will add the required options to enable the cpu and memory interfaces. 
 
-####Update: Taint on node.
+###Update: Taint on node.
 As the cluster is a single node it contains all of the roles. Master hosts are tainted for `NoSchedule` by default. This means that non Pods are able to be deployed to the cluster. This can be removed with the following:
 
 ```bash
