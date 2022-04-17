@@ -12,7 +12,7 @@ Recently, I have been exploring how DNS can be managed to assist in managing con
 [Pi-hole](https://pi-hole.net/) is an on-premise DNS server that provides DNS filtering and black-hole lists to remove advertising. 
 Pi-hole can be deployed on low power hardware like a Raspberry-pi using Linux via the installer or [Docker container](https://github.com/pi-hole/docker-pi-hole).
 
-I didn't have a host running docker or a spare Pi laying about, but what I did have was a Kubernetes host that was built as part of this post. So I thought why not!
+I didn't have a host running docker or a spare Pi laying about, but what I did have was a Kubernetes host that was built as part of this [post](https://dalethestirling.github.io/Lightweight-Kubernetes-Centos-8-Stream/). So I thought why not!
 
 Deploying to Kubernetes gives you access to an additional layer of orchestration that can help with the availability of the service in the event it crashes. 
 
