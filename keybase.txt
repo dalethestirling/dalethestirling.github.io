@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/dale_stirling
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://dalethestirling.github.io
+  * I am dale_stirling (https://keybase.io/dale_stirling) on keybase.
+  * I have a public key ASBf6yoguvhr0qq6y7ck0j_h6-_V-RwOFC619oak9zCPnQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01205feb2a20baf86bd2aabacbb724d23fe1ebefd5f91c0e142eb5f686a4f7308f9d0a",
+      "host": "keybase.io",
+      "kid": "01205feb2a20baf86bd2aabacbb724d23fe1ebefd5f91c0e142eb5f686a4f7308f9d0a",
+      "uid": "fbdf11aeb305da0f97e7d6de215f8a19",
+      "username": "dale_stirling"
+    },
+    "merkle_root": {
+      "ctime": 1655429651,
+      "hash": "28921f175d265d7cc38607cda3a2bbc0650d5faa08bae7ed86894a4209bd5d51740fe82bcb4af013b8bfeaa77b4cdf71a44966e1e39ea45dd8c07eff1d2c37e7",
+      "hash_meta": "6d149d760df0ed6cf9c384487ccbacabc15741517953c439078ab3ff0f4d05c7",
+      "seqno": 22689663
+    },
+    "service": {
+      "entropy": "EIgx5yA8ZmSZqTIhGHoiz2Y2",
+      "hostname": "dalethestirling.github.io",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.0.1"
+  },
+  "ctime": 1655429692,
+  "expire_in": 504576000,
+  "prev": "bed434805c9a180009d7a4bf677688a0006c8a310caf6364d39684282ce02b30",
+  "seqno": 30,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgX+sqILr4a9Kqusu3JNI/4evv1fkcDhQutfaGpPcwj50Kp3BheWxvYWTESpcCHsQgvtQ0gFyaGAAJ16S/Z3aIoABsijEMr2Nk05aEKCzgKzDEINllTOCjmLwZ8GwEGTE11Hd/OPxe43OzWXfzhLEEftY7AgHCo3NpZ8RAxP2tOEspuQBKG0TMlqKsEu+KiMU+oVwnd9ZPMtSrStrjxUt4KXobYBhsWMutgadwuvBi+Ob6GMXdu4evwoQtD6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEINiX8o7PFX9jMZa+e2vTBc9fG4TfCzesG+PQvK0MT/kOo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/dale_stirling
+
+==================================================================
