@@ -9,7 +9,7 @@ With all of the fun, the world has been having it took a while for our turn to g
 
 Initially, we used the warm weather to push the cable from the dish through the dog door which worked great while the door opened 24/7. Doing this was not ideal as we had a few uninvited guests come in through the gap and now we are into winter open doors for good internet are not a family favourite. 
 
-I looked at the [Starlink wall cavity kit](https://shop.starlink.com/products/au-consumer-cablerouting-kit-grey), but at $79 dollars I thought that I could put something together cheaper. Also with the introduction of roaming, it also needed to be easily disconnected from the house. 
+I looked at the [Starlink wall cavity kit](https://shop.starlink.com/products/au-consumer-cablerouting-kit-grey), but at 79 dollars I thought that I could put something together cheaper. Also with the introduction of roaming, it needed to be easily disconnected from the house. 
 
 My plan was a simple ethernet passthrough, from under the house (the house is on stumps) into the living room. This would also allow the cable to travel to where I am going to mount it on the roof easily as well. 
 
@@ -27,7 +27,7 @@ So with the router delegated to outside a window and the internet restored it wa
 
 There are 2 unique things with the POE implementation used by the Dishy. The first is that the Dishy uses 2 pairs for power injection (POE++ 802.3bt) and can draw up to 100W which has been confirmed by a bunch of users and confirmed in this [Starlink engineers AMA](https://arstechnica.com/information-technology/2020/11/spacex-starlink-questions-answered-wider-beta-soon-no-plan-for-data-caps/). 
 
-So now I knew how it worked it was back to the internet to understand why my passthrough didn't work. I didn't find anything that said POE++ could not be deployed on Cat5e, but there were a number of things that suggested that Cat6 may be the answer. 
+So now I knew how it worked it was back to the internet to understand why my passthrough didn't work. I didn't find anything that said POE++ could not be deployed on Cat5e, but several things suggested that Cat6 may be the answer. 
 
 First, the grey cable from my Dishy (v1 round) had been identified by users as Cat6 on Reddit. 
 
@@ -51,7 +51,7 @@ This solution worked, with speeds and latency similar to what we had seen the pa
 
 <img alt="Speed test nest router" src="{{ site.url }}/images/starlink-pass-speed.jpg" width="350"><img alt="Starlink latency" src="{{ site.url }}/images/starlink-pass-latency.png" width="350">
 
-So to summarise this adventure you can use Cat6 to pass the Dishy v1 cable into the house for cheap. In the end the cost for the solution was a total of $28 all from Bunnings. The list of components is here:
+So to summarise this adventure you can use Cat6 to pass the Dishy v1 cable into the house for cheap. In the end, the cost for the solution was a total of $28 all from Bunnings. The list of components is here:
 
 - [0.5m Cat6 Patch](https://www.bunnings.com.au/antsig-0-5m-cat6-rj45-ethernet-network-cable_p0286536): $3.58
 - [RJ45 Connector](https://www.bunnings.com.au/deta-rj45-8p8c-ethernet-inline-coupler-joiner_p4360449): $10.04
