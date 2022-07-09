@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Getting Starlink into the house on the cheap
+tag: starlink	 
 ---
 
 When we made a move further out of town the options were limited for internet connectivity, so once we had a property address I signed up for the preorder of [Starlink](https://starlink.com/). 
