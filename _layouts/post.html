@@ -10,6 +10,7 @@ layout: default
   </div>
 
   <div class="date">
+      Tags:&nbsp;{% for tag in page.tags %}<a class="date" href="/tag/{{ tag | slugify }}">{{ tag }}&nbsp;</a>{% endfor %}<br>
     Written on {{ page.date | date: "%B %e, %Y" }}
   </div>
 

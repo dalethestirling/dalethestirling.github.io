@@ -25,9 +25,22 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 740px;
+  max-width: 860px;
   padding: 0 10px;
   width: 100%;
+}
+
+.left-column {
+  flex: 65%;
+  padding: 0 10px;
+}
+
+.right-column {
+  flex: 35%
+}
+
+.flex-row {
+  display: flex;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -281,6 +294,51 @@ nav {
 footer {
   padding: 20px 0;
   text-align: center;
+}
+
+// Tags
+.tags {
+  font-family: $helveticaNeue;
+  font-size: 14px;
+  color: #cccccc;
+  letter-spacing: 1px;
+}
+
+.tag-post {
+  font-family: $helveticaNeue;
+  color: #8c8c8c;
+  letter-spacing: 1px;
+}
+
+// Tag cloud
+.tag-size-5 {
+  font-size: 1.25rem;
+  font-family: $helveticaNeue;
+  color: #8c8c8c;
+}
+
+.tag-size-4 { 
+  font-size: 1.10rem;
+  font-family: $helveticaNeue;
+  color: #8c8c8c;
+}
+
+.tag-size-3 {
+  font-size: 0.95rem;
+  font-family: $helveticaNeue;
+  color: #8c8c8c;
+}
+
+.tag-size-2 {
+  font-size: 0.80rem;
+  font-family: $helveticaNeue;
+  color: #8c8c8c;
+}
+
+.tag-size-1 {
+  font-size: 0.65rem;
+  font-family: $helveticaNeue;
+  color: #8c8c8c;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS

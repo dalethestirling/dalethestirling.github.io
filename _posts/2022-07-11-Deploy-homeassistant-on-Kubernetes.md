@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Deploying Homeassistant on Kubernetes
+tags: home-automation kubernetes homeassistant
 ---
 
 When we moved to the new house, one of the things we did was step up our home automation from Google home/Action blocks to Home Assistant. 
