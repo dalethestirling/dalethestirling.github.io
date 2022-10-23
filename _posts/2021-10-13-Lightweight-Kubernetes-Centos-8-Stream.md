@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Deploying Kubernetes using lightweight runtimes on Centos Stream 8 
+tags: kubernetes containers project open container iniative runc cri-o crun
 ---
 
 

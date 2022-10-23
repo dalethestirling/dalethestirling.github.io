@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Building containers from scratch with container tools project
+tags: podman buildah skopeo containers-project
 ---
 
 As container runtime and image standards have evolved and standards developed by projects like the [Open Container Initiative](https://opencontainers.org/) (OCI), there has been an increase in the number of solutions and/or use case specific tools being developed both in FOSS and commercial tools. 

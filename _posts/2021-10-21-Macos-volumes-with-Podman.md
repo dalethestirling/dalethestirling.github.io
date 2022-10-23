@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Mounting Macos directories in containers with Podman 
+title: Mounting Macos directories in containers with Podman
+tags: podman sshfs osx
 ---
 
 Recently RedHat released an article about [Podman's machine function](https://www.redhat.com/sysadmin/podman-mac-machine-architecture) and how it can be leveraged on Macos. 

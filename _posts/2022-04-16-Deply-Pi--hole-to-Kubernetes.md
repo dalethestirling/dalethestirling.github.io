@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Deploying pi-hole-docker on Kubernetes
+tags: pi-hole home-automation kubernetes
 ---
 
 The internet can be a scary place, especially when you have kids. 
