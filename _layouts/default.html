@@ -31,7 +31,11 @@
     {% endunless %}
   {% endif %}
 {% endfor %}
-
+{% for mtag in  site.tags %}
+  {% assign metatags = mtag[0] | append: "," | append: metatags %}
+{% endfor %}
+{% seo %}
+<meta property="keywords" content="{{ metatags }}" />
   </head>
 
   <body>
