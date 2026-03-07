@@ -4,7 +4,7 @@ title: Using Skills For Standard Workspaces
 tags: antigravity google ai llm agentic-development vibe-coding development
 ---
 
-For those who are connected on LinkedIn you will know that I have been doing work on a project using Google Antigravity (https://antigravity.google/). 
+For those who are connected on LinkedIn you will know that I have been doing work on a project using [Google Antigravity](https://antigravity.google/). 
 
 One thing that I have been exploring is the use of Skills to assist in maintaining standard workspaces. This was something in the past that would have been done in an IDP scaffolding activity or a custom pipeline.
 
